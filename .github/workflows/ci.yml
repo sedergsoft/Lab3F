@@ -1,0 +1,20 @@
+name: Build Lab3F
+
+on:
+  push:
+    branches: [main, 'solution/**']
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+      - name: Restore
+        run: dotnet restore ./src/MiniListApp/MiniListApp.csproj
+      - name: Build
+        run: dotnet build ./src/MiniListApp/MiniListApp.csproj --configuration Release --no-restore
