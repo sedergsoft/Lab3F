@@ -43,32 +43,41 @@ public sealed class MiniList<T> : IEnumerable<T>
     {
         private readonly Node? _first = head;
         private Node? _current;
-        private bool _hasCurrent;
+        private bool _started;
+        private bool _ended;
 
-        public T Current => _hasCurrent
-            ? _current!.Value
-            : throw new InvalidOperationException("The enumerator is not positioned on an element.");
+        public T Current => !_started || _ended
+            ? throw new InvalidOperationException("The enumerator is not positioned on an element.")
+            : _current!.Value;
 
         object? IEnumerator.Current => Current;
 
         public bool MoveNext()
         {
-            if (!_hasCurrent)
+            if (_ended)
+                return false;
+
+            if (!_started)
             {
                 _current = _first;
-                _hasCurrent = _current is not null;
-                return _hasCurrent;
+                _started = true;
+            }
+            else
+            {
+                _current = _current!.Next;
             }
 
-            _current = _current!.Next;
-            _hasCurrent = _current is not null;
-            return _hasCurrent;
+            if (_current is null)
+                _ended = true;
+
+            return !_ended;
         }
 
         public void Reset()
         {
             _current = null;
-            _hasCurrent = false;
+            _started = false;
+            _ended = false;
         }
 
         public void Dispose()
