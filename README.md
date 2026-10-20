@@ -1,11 +1,11 @@
 # Lab3F — Laboratorio 3: MiniList<T>
 
-Solución de referencia en C#/.NET 8 para una aplicación Windows Forms que representa elementos mediante una lista enlazada genérica e implementa `IEnumerable<T>`.
+Solución en C#/.NET 8 para una aplicación Windows Forms que usa una lista enlazada genérica `MiniList<T>` e implementa `IEnumerable<T>` e `IEnumerator<T>`.
 
 ## Estructura
 - `src/MiniListApp/MiniListApp.csproj`: proyecto Windows Forms para Windows.
 - `src/MiniListApp/Program.cs`: punto de entrada.
-- `src/MiniListApp/MiniList.cs`: lista enlazada genérica.
+- `src/MiniListApp/MiniList.cs`: lista enlazada genérica y enumerador explícito (`Current`, `MoveNext`, `Reset`, `Dispose`).
 - `src/MiniListApp/Form1.cs`: interfaz y acciones del laboratorio.
 - `reports/Informe_Espanol.md`, `reports/Отчёт_Русский.md`, `reports/Report_English.md`: informes en tres idiomas.
 - `reports/TEST_PLAN.md`: plan de pruebas en español, ruso e inglés.
@@ -32,8 +32,11 @@ dotnet run --project .\src\MiniListApp\MiniListApp.csproj
 3. Recorrer los controles visuales del panel.
 4. Recorrer los elementos mediante `foreach` sobre `MiniList<T>`.
 
-## Validación pendiente
-El workflow de GitHub Actions compilará el proyecto en Windows. Hasta que se ejecute correctamente, no debe afirmarse que la compilación está validada. También hay que ejecutar los casos de `reports/TEST_PLAN.md` y cotejar la solución con el documento oficial de la asignatura, que no se ha podido recuperar de la conversación compartida.
+## Validación
+- GitHub Actions completó correctamente `Restore` y `Build` en Windows con .NET 8 para el commit de implementación `25bc5575949f4430f65604cc4d2c02c033f3454a`.
+- La validación anterior confirma compilación, no pruebas funcionales de la interfaz.
+- Los casos manuales de `reports/TEST_PLAN.md` aún deben ejecutarse en Windows.
+- El documento oficial `ТПР ПО Осн Лаб 3.docx` está incluido en esta rama, pero su contenido no se ha cotejado línea por línea; por tanto, no se afirma que todos los requisitos docentes estén verificados.
 
 ## Informes
 Los informes están en Markdown para facilitar la revisión y conversión a Word/PDF si se requiere.
